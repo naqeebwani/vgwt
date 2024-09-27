@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VGWT - Transport Services</title>
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* White background */
+            color: #333;
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
+
+        /* Container */
+        .container {
+            width: 80%;
+            height:auto ;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        /* Header */
+        header {
+            background-color: #001f3f; /* Navy blue */
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 150px;
+            margin-right: 25px;
+            animation: rotate 4s infinite alternate;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        nav {
+            float: right;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700; /* Gold */
+        }
+
+        /* Dropdown Menu */
+        nav ul li ul {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background: #001f3f;
+            padding: 10px 0;
+            display: none;
+            flex-direction: column;
+        }
+
+        nav ul li:hover ul {
+            display: flex;
+        }
+
+        nav ul li ul li a {
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li ul li a:hover {
+            background: #ffd700;
+            color: #001f3f;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #d3d3d3; /* Light gray */
+            color: #001f3f; /* Navy blue text */
+            text-align: center;
+            padding: 100px 0;
+            border-bottom: 5px solid #ffd700; /* Gold accent */
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero .btn {
+            background-color: #ffd700; /* Gold */
+            padding: 15px 30px;
+            color: #001f3f;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero .btn:hover {
+            background-color: #001f3f;
+            color: #ffd700; /* Gold */
+            box-shadow: 0 4px 20px rgba(0, 31, 63, 0.3);
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Slideshow */
+        .slideshow {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .slides {
+            display: none;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .slides.active {
+            display: block;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .products h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #001f3f;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .product-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            background: white;
+            border: 1px solid #d3d3d3; /* Light gray */
+            border-radius: 10px;
+            padding: 20px;
+            width: 23%;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 31, 63, 0.1);
+        }
+
+        .product h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #001f3f;
+        }
+
+        .product p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* New Services Section */
+        .services {
+            background-color: #f4f4f4;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .services h3 {
+            font-size: 2rem;
+            color: #001f3f;
+            margin-bottom: 30px;
+        }
+
+        .services .service-item {
+            width: 30%;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .services .service-item:hover {
+            box-shadow: 0 0 15px rgba(0, 31, 63, 0.2);
+        }
+
+        .services .service-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #001f3f;
+        }
+
+        /* New Testimonials Section */
+        .testimonials {
+            background-color: #001f3f;
+            padding: 40px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .testimonials h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffd700; /* Gold */
+        }
+
+        .testimonials .testimonial {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #ddd;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #001f3f; /* Navy blue */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 5px solid #ffd700; /* Gold */
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ffd700; /* Gold */
+            color: #001f3f;
+            padding: 10px 15px;
+            font-size: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-top-btn:hover {
+            background: #001f3f;
+            color: #ffd700; /* Gold */
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            .product-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product {
+                width: 90%;
+                margin-bottom: 30px;
+            }
+
+            .services .service-item {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="VGWT Logo" class="logo-img">
+                <h1>VGWT - Transport Services</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about us">About us</a></li>
+                    <li><a href="#Product">Product</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <a href="#">More</a>
+                        <ul>
+                            <li><a href="#faq">FAQ</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Your Trusted Transport Partner</h2>
+            <p>Fast, Reliable, and Efficient Transportation Solutions.</p>
+            <a href="#services" class="btn">Explore Services</a>
+        </section>
+
+        <section class="slideshow">
+            <img class="slides" src="images/truck1.jpg" alt="Truck 1">
+            <img class="slides" src="images/truck2.jpg" alt="Truck 2">
+            <img class="slides" src="images/truck3.jpg" alt="Truck 3">
+        </section>
+
+        <section class="products">
+            <h3>Our Featured Transport Solutions</h3>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/product1.jpg" alt="Product 1">
+                    <h4>Heavy Load Transport</h4>
+                    <p>Efficient and reliable transportation for your heavy loads, ensuring on-time delivery.</p>
+                </div>
+                <div class="product">
+                    <img src="images/product2.jpg" alt="Product 2">
+                    <h4>Freight Shipping</h4>
+                    <p>Providing a wide range of freight shipping solutions tailored to your specific needs.</p>
+                </div>
+                <div class="product">
+                    <img src="images/product3.jpg" alt="Product 3">
+                    <h4>Refrigerated Trucks</h4>
+                    <p>Keep your goods at the perfect temperature during transportation with our refrigerated trucks.</p>
+                </div>
+                <div class="product">
+                    <img src="images/product4.jpg" alt="Product 4">
+                    <h4>Express Delivery</h4>
+                    <p>Fast and secure express delivery services for urgent shipments, both locally and internationally.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Services Section -->
+        <section class="services">
+            <h3>Our Transport Services</h3>
+            <div class="service-item">
+                <h4>Logistics Management</h4>
+                <p>We offer end-to-end logistics management solutions to streamline your supply chain.</p>
+            </div>
+        </section>
+
+        <!-- New Testimonials Section -->
+        <section class="testimonials">
+            <h3>What Our Clients Say</h3>
+            <div class="testimonial">
+                <p>"VGWT provided us with excellent service. We trust them with all our heavy load transportation needs!"</p>
+                <p>- John Doe, CEO of Heavy Lifts Inc.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Their express delivery services are unmatched. Always on time and with great customer service."</p>
+                <p>- Jane Smith, Logistics Manager at QuickShip.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 VGWT - All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top-btn" id="scrollTopBtn">&#8679;</div>
+
+    <!-- JavaScript for slideshow and scroll to top button -->
+    <script>
+        // Slideshow
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slides');
+        
+        function showSlides() {
+            slides.forEach((slide, index) => {
+                slide.style.display = 'none';
+                if (index === slideIndex) {
+                    slide.style.display = 'block';
+                }
+            });
+            slideIndex++;
+            if (slideIndex >= slides.length) slideIndex = 0;
+            setTimeout(showSlides, 3000); // Change slide every 3 seconds
+        }
+        
+        showSlides(); // Initialize slideshow
+
+        // Scroll to Top Button
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        };
+
+        scrollTopBtn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+    </script>
+</body>
+</html>
